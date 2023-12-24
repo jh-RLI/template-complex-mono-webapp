@@ -59,17 +59,34 @@ jobs:
           python-version: '3.11'
           cache: pip
           cache-dependency-path: |
-            htmxdj/requirements/base.txt
-            htmxdj/requirements/local.txt
+            requirements/base.txt
+            requirements/local.txt
 
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r htmxdj/requirements/local.txt
+          pip install -r requirements/local.txt
 
       - name: Step into directory that includes tests and django config
         run: |
           cd htmxdj/
 
-      - name: Test with pytest
-        run: pytest
+      # - name: Test with pytest
+      #   run: pytest
+
+      - name: Verify django application
+        run: 
+      
+      - name: Migrations & User creation
+        run: |
+          python manage.py makemigrations --check
+          python manage.py migrate
+
+      - name: Cache offline-compress & cache busting 
+        run: python manage.py compress
+
+      - name: Start who-is-ah
+        run: python manage.py runserver 8000 &
+
+      - name: Run django tests
+       run: python manage.py test --no-input
