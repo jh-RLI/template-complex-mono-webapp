@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div hx-get="{% url 'partial-page-sidebar-content' %}" hx-swap="outerHTML" hx-target="#content-sidebar" hx-trigger="load" id="content-sidebar"></div>
+<div hx-get="{% url 'partials:partial-services' %}" hx-swap="outerHTML" hx-target="#content-services" hx-trigger="load" id="content-services"></div>
+<div hx-get="{% url 'partials:partial-projects' %}" hx-swap="outerHTML" hx-target="#content-projects" hx-trigger="load" id="content-projects"></div>
+<div hx-get="{% url 'partials:partial-news' %}" hx-swap="outerHTML" hx-target="#content-news" hx-trigger="load" id="content-news"></div>
 
 <div id="loading-spinner" class="spinner-border text-primary" role="status" style="display: none;">
     <span class="visually-hidden">Loading...</span>
@@ -12,12 +14,10 @@
 <script>
     document.addEventListener('htmx:beforeRequest', function (event) {
         document.getElementById('loading-spinner').style.display = 'block';
-        document.getElementById('loading-spinner-sidebar').style.display = 'block';
     });
 
     document.addEventListener('htmx:afterSwap', function (event) {
         document.getElementById('loading-spinner').style.display = 'none';
-        document.getElementById('loading-spinner-sidebar').style.display = 'none';
     });
 
     // Optionally, you can use this event to handle errors
