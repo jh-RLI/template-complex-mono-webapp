@@ -1,30 +1,43 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div hx-get="{% url 'partials:partial-services' %}" hx-swap="outerHTML" hx-target="#content-services" hx-trigger="load" id="content-services"></div>
-<div hx-get="{% url 'partials:partial-projects' %}" hx-swap="outerHTML" hx-target="#content-projects" hx-trigger="load" id="content-projects"></div>
-<div hx-get="{% url 'partials:partial-news' %}" hx-swap="outerHTML" hx-target="#content-news" hx-trigger="load" id="content-news"></div>
-
-<div id="loading-spinner" class="spinner-border text-primary" role="status" style="display: none;">
+  <div hx-get="{% url 'partials:partial-services' %}"
+       hx-swap="outerHTML"
+       hx-target="#content-services"
+       hx-trigger="load"
+       id="content-services"></div>
+  <div hx-get="{% url 'partials:partial-projects' %}"
+       hx-swap="outerHTML"
+       hx-target="#content-projects"
+       hx-trigger="load"
+       id="content-projects"></div>
+  <div hx-get="{% url 'partials:partial-news' %}"
+       hx-swap="outerHTML"
+       hx-target="#content-news"
+       hx-trigger="load"
+       id="content-news"></div>
+  <div id="loading-spinner"
+       class="spinner-border text-primary"
+       role="status"
+       style="display: none">
     <span class="visually-hidden">Loading...</span>
-</div>
+  </div>
 {% endblock content %}
-
 {% block javascript %}
-<script>
-    document.addEventListener('htmx:beforeRequest', function (event) {
-        document.getElementById('loading-spinner').style.display = 'block';
+  <script>
+    document.addEventListener('htmx:beforeRequest', function(event) {
+      document.getElementById('loading-spinner').style.display = 'block';
     });
 
-    document.addEventListener('htmx:afterSwap', function (event) {
-        document.getElementById('loading-spinner').style.display = 'none';
+    document.addEventListener('htmx:afterSwap', function(event) {
+      document.getElementById('loading-spinner').style.display = 'none';
     });
 
     // Optionally, you can use this event to handle errors
-    document.addEventListener('htmx:afterRequest', function (event) {
-        if (event.detail.xhr.status >= 400) {
-            console.error('Request failed:', event.detail.xhr);
-        }
+    document.addEventListener('htmx:afterRequest', function(event) {
+      if (event.detail.xhr.status >= 400) {
+        console.error('Request failed:', event.detail.xhr);
+      }
     });
-</script>
+  </script>
 {% endblock javascript %}

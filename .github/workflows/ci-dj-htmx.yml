@@ -73,13 +73,13 @@ jobs:
 
       # - name: Test with pytest
       #   run: pytest
-      
+
       - name: Migrations & User creation
         run: |
           python manage.py makemigrations --check
           python manage.py migrate
 
-      - name: Cache offline-compress & cache busting 
+      - name: Cache offline-compress & cache busting
         run: python manage.py compress
 
       - name: Verify who-is-ah is running

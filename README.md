@@ -11,4 +11,3 @@ Python, Django, HTMX, Tailwind
 ### Framework
 
 ....
-
