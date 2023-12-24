@@ -89,4 +89,4 @@ jobs:
         run: python manage.py runserver 8000 &
 
       - name: Run django tests
-       run: python manage.py test --no-input
+        run: python manage.py test --no-input
