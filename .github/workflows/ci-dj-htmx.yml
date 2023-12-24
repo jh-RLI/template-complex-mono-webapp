@@ -73,7 +73,7 @@ jobs:
 
       - name: Create PostgreSQL database
         run: |
-          psql -h localhost -U postgres -c "CREATE DATABASE htmx_dj;"
+          psql -h localhost -U postgres -d postgres -c "CREATE DATABASE htmx_dj;"
 
       # - name: Test with pytest
       #   run: pytest
