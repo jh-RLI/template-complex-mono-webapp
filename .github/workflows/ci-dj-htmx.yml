@@ -72,8 +72,10 @@ jobs:
           cd htmxdj/
 
       - name: Create PostgreSQL database
+        env:
+          PGPASSWORD: postgres
         run: |
-          psql -h localhost -U postgres -c "CREATE DATABASE htmx_dj;" -W
+          psql -h localhost -U postgres -c "CREATE DATABASE htmx_dj;"
 
       # - name: Test with pytest
       #   run: pytest
