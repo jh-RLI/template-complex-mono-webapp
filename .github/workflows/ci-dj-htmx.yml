@@ -73,9 +73,6 @@ jobs:
 
       # - name: Test with pytest
       #   run: pytest
-
-      - name: Verify django application
-        run: 
       
       - name: Migrations & User creation
         run: |
@@ -85,7 +82,7 @@ jobs:
       - name: Cache offline-compress & cache busting 
         run: python manage.py compress
 
-      - name: Start who-is-ah
+      - name: Verify who-is-ah is running
         run: python manage.py runserver 8000 &
 
       - name: Run django tests
