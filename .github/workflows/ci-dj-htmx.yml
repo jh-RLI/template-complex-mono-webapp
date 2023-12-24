@@ -85,8 +85,8 @@ jobs:
           python manage.py makemigrations --check
           python manage.py migrate
 
-      - name: Cache offline-compress & cache busting
-        run: python manage.py compress
+      # - name: Cache offline-compress & cache busting
+      #   run: python manage.py compress
 
       - name: Verify who-is-ah is running
         run: python manage.py runserver 8000 &
