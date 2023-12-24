@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models  # noqa
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Page
