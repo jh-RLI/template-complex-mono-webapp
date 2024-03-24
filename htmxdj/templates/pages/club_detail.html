@@ -1,0 +1,42 @@
+{% extends "base_tailwindcss.html" %}
+
+{% block content %}
+
+<div hx-get="{% url 'partials:partial-club' %}"
+hx-swap="outerHTML"
+hx-target="#content-news"
+hx-trigger="load"
+id="content-news"></div>
+
+
+<div id="loading-spinner" class="spinner-border text-primary" role="status">
+<span class="visually-hidden">Loading...</span>
+</div>
+<style>
+.loading-spinner {
+display: none;
+}
+</style>
+
+{% endblock content %}
+
+
+
+{% block javascript %}
+<script>
+document.addEventListener('htmx:beforeRequest', function(event) {
+document.getElementById('loading-spinner').style.display = 'block';
+});
+
+document.addEventListener('htmx:afterSwap', function(event) {
+document.getElementById('loading-spinner').style.display = 'none';
+});
+
+// Optionally, you can use this event to handle errors
+document.addEventListener('htmx:afterRequest', function(event) {
+if (event.detail.xhr.status >= 400) {
+ console.error('Request failed:', event.detail.xhr);
+}
+});
+</script>
+{% endblock javascript %}
