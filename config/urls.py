@@ -18,11 +18,16 @@ urlpatterns = [
     # User management
     path("users/", include("htmxdj.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+    # Wagtail CMS
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("pages/", include(wagtail_urls)),
+    # For anything not caught by a more specific rule above, hand over to
+    # Wagtail's serving mechanism
+    # path("", include(wagtail_urls)),
+    # Your stuff: custom urls includes go here
     path("partial/", include("htmxdj.partials.urls", namespace="partials")),
+    path("clubs/club/", TemplateView.as_view(template_name="pages/club_detail.html"), name="clubs-detail"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS

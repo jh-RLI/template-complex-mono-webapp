@@ -1,5 +1,6 @@
 from django.shortcuts import HttpResponse, render
 from django.views import View
+from django.views.generic.detail import DetailView
 
 
 class PartialHomeProjects(View):
@@ -30,3 +31,8 @@ class PartialHomeNews(View):
         ).content.decode("utf-8")
 
         return HttpResponse(partial)
+
+
+class PartialDetailClub(DetailView):
+    def get(self, request):
+        return render(request, "partials/club.html")
