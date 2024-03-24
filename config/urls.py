@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
@@ -9,6 +9,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.documents import urls as wagtaildocs_urls
+
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -18,11 +19,16 @@ urlpatterns = [
     # User management
     path("users/", include("htmxdj.users.urls", namespace="users")),
     path("accounts/", include("allauth.urls")),
-    # Your stuff: custom urls includes go here
+    # Wagtail CMS
     path("cms/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("pages/", include(wagtail_urls)),
+    # For anything not caught by a more specific rule above, hand over to
+    # Wagtail's serving mechanism
+    re_path(r'', include(wagtail_urls)),
+    # Your stuff: custom urls includes go here
     path("partial/", include("htmxdj.partials.urls", namespace="partials")),
+    path("clubs/club/", TemplateView.as_view(template_name="pages/club_detail.html"), name="clubs-detail"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
