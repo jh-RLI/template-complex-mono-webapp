@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponse, render
-from django.views.generic.detail import DetailView
 from django.views import View
+from django.views.generic.detail import DetailView
 
 
 class PartialHomeProjects(View):
@@ -35,5 +35,4 @@ class PartialHomeNews(View):
 
 class PartialDetailClub(DetailView):
     def get(self, request):
-
         return render(request, "partials/club.html")
