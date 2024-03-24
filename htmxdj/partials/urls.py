@@ -2,6 +2,7 @@ from django.urls import path
 
 from htmxdj.partials.views import PartialHomeNews, PartialHomeProjects, PartialHomeServices
 
+# test
 app_name = "users"
 urlpatterns = [
     path("projects/", view=PartialHomeProjects.as_view(), name="partial-projects"),
